@@ -1,0 +1,6 @@
+@EuroMobileTest_HostAddress = http://localhost:5062
+
+GET {{EuroMobileTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
