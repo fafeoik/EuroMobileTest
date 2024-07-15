@@ -42,7 +42,7 @@ public class CoordinatesControllerTests
             new Coordinates ( -19.282392,1.231232 )
         };
 
-        HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
+        using HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
 
         string responseContent = await response.Content.ReadAsStringAsync();
         Dictionary<string, double>? distanceData = JsonConvert.DeserializeObject<Dictionary<string, double>>(responseContent);
@@ -60,7 +60,7 @@ public class CoordinatesControllerTests
 
         Coordinates[] coordinates = Array.Empty<Coordinates>();
 
-        HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
+        using HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Equal("{\"meters\":0,\"miles\":0}", await response.Content.ReadAsStringAsync());
@@ -82,7 +82,7 @@ public class CoordinatesControllerTests
             new Coordinates (latitude, longitude )
         };
 
-        HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
+        using HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Equal("{\"meters\":0,\"miles\":0}", await response.Content.ReadAsStringAsync());
@@ -96,7 +96,7 @@ public class CoordinatesControllerTests
 
         Coordinates[]? coordinates = null;
 
-        HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
+        using HttpResponseMessage response = await httpClient.PostAsJsonAsync("/coordinates", coordinates);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Equal("{\"meters\":0,\"miles\":0}", await response.Content.ReadAsStringAsync());
